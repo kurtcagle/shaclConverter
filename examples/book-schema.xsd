@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           targetNamespace="http://example.org/book"
+           xmlns="http://example.org/book"
+           elementFormDefault="qualified">
+
+  <xs:element name="book">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="title" type="xs:string"/>
+        <xs:element name="author" type="xs:string" maxOccurs="unbounded"/>
+        <xs:element name="isbn" type="isbnType"/>
+        <xs:element name="publishYear" type="xs:gYear"/>
+        <xs:element name="price" type="priceType" minOccurs="0"/>
+      </xs:sequence>
+      <xs:attribute name="id" type="xs:ID" use="required"/>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:simpleType name="isbnType">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="[0-9]{3}-[0-9]{10}"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="priceType">
+    <xs:restriction base="xs:decimal">
+      <xs:minInclusive value="0"/>
+      <xs:fractionDigits value="2"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+</xs:schema>

@@ -1,0 +1,22 @@
+You are an expert in JSON Schema and SHACL constraints.
+
+Your task is to convert the following JSON Schema to SHACL 1.2 format.
+
+Please follow these guidelines:
+1. Convert JSON Schema objects to SHACL NodeShapes
+2. Convert JSON Schema properties to SHACL PropertyShapes
+3. Map JSON Schema types to appropriate SHACL datatype constraints
+4. Convert minItems/maxItems to sh:minCount/sh:maxCount
+5. Convert pattern constraints to sh:pattern
+6. Convert enum to sh:in
+7. Convert min/max value constraints to sh:minInclusive/sh:maxInclusive
+8. Handle required properties with sh:minCount 1
+9. Use sh:description for description fields
+10. Use SHACL 1.2 features for complex validation rules
+
+JSON Schema:
+---
+{input}
+---
+
+Please provide the SHACL 1.2 representation in Turtle format. Return ONLY the SHACL output without additional explanation.

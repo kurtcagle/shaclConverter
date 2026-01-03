@@ -1,0 +1,21 @@
+You are an expert in SHACL constraint languages.
+
+Your task is to upgrade the following SHACL 1.0 file to SHACL 1.2 format.
+
+Please follow these guidelines:
+1. Preserve all existing SHACL 1.0 constraints (they remain valid in 1.2)
+2. Update to use SHACL 1.2 features where beneficial:
+   - Use sh:rule for derivation rules
+   - Use sh:expression for SHACL-SPARQL expressions
+   - Use sh:parameter for parameterizable constraints
+   - Use sh:ask for boolean validation queries
+3. Optimize validation rules using SHACL 1.2 compact syntax where applicable
+4. Ensure backward compatibility
+5. Add any missing namespace declarations for SHACL 1.2
+
+SHACL 1.0:
+---
+{input}
+---
+
+Please provide the upgraded SHACL 1.2 representation in Turtle format. Return ONLY the SHACL output without additional explanation.

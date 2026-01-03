@@ -1,0 +1,20 @@
+You are an expert in XML Schema (XSD) and SHACL constraints.
+
+Your task is to convert the following XSD schema to SHACL 1.2 format.
+
+Please follow these guidelines:
+1. Convert XSD complex types to SHACL NodeShapes
+2. Convert XSD elements to SHACL PropertyShapes
+3. Map XSD simple types to SHACL datatype constraints (xsd:string, xsd:integer, etc.)
+4. Convert XSD minOccurs/maxOccurs to sh:minCount/sh:maxCount
+5. Convert XSD restrictions (pattern, enumeration, min/max values) to appropriate SHACL constraints
+6. Preserve documentation from xs:annotation as sh:description
+7. Handle XSD extension and restriction mechanisms
+8. Use SHACL 1.2 features for complex validation rules
+
+XSD Schema:
+---
+{input}
+---
+
+Please provide the SHACL 1.2 representation in Turtle format. Return ONLY the SHACL output without additional explanation.

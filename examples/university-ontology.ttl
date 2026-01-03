@@ -1,0 +1,68 @@
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix ex: <http://example.org/university#> .
+
+ex:University a owl:Ontology ;
+    rdfs:label "University Ontology" ;
+    rdfs:comment "A simple ontology for university domain" .
+
+# Classes
+ex:Person a owl:Class ;
+    rdfs:label "Person" ;
+    rdfs:comment "A human being" .
+
+ex:Student a owl:Class ;
+    rdfs:subClassOf ex:Person ;
+    rdfs:label "Student" ;
+    rdfs:comment "A person enrolled in a university" .
+
+ex:Professor a owl:Class ;
+    rdfs:subClassOf ex:Person ;
+    rdfs:label "Professor" ;
+    rdfs:comment "A person who teaches at a university" .
+
+ex:Course a owl:Class ;
+    rdfs:label "Course" ;
+    rdfs:comment "An educational course" .
+
+# Data Properties
+ex:name a owl:DatatypeProperty ;
+    rdfs:domain ex:Person ;
+    rdfs:range xsd:string ;
+    rdfs:label "name" .
+
+ex:studentId a owl:DatatypeProperty ;
+    rdfs:domain ex:Student ;
+    rdfs:range xsd:string ;
+    rdfs:label "student ID" ;
+    a owl:FunctionalProperty .
+
+ex:age a owl:DatatypeProperty ;
+    rdfs:domain ex:Person ;
+    rdfs:range xsd:integer ;
+    rdfs:label "age" .
+
+ex:courseCode a owl:DatatypeProperty ;
+    rdfs:domain ex:Course ;
+    rdfs:range xsd:string ;
+    rdfs:label "course code" .
+
+# Object Properties
+ex:enrolledIn a owl:ObjectProperty ;
+    rdfs:domain ex:Student ;
+    rdfs:range ex:Course ;
+    rdfs:label "enrolled in" .
+
+ex:teaches a owl:ObjectProperty ;
+    rdfs:domain ex:Professor ;
+    rdfs:range ex:Course ;
+    rdfs:label "teaches" .
+
+# Restrictions
+ex:Student rdfs:subClassOf [
+    a owl:Restriction ;
+    owl:onProperty ex:enrolledIn ;
+    owl:minCardinality 1
+] .
