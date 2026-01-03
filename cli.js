@@ -68,7 +68,6 @@ program
         } else if (fileType === 'pdf') {
           content = await FileParser.parsePdf(source);
         }
-        }
       }
 
       // Override type if specified
