@@ -35,8 +35,14 @@ export class FileParser {
    * Load content from file path
    */
   static async loadFile(filePath) {
-    const content = await fs.readFile(filePath, 'utf-8');
     const fileType = this.detectFileType(filePath);
+    const binaryTypes = ['excel', 'pdf'];
+    
+    // Read binary files as buffer, text files as UTF-8
+    const content = binaryTypes.includes(fileType) 
+      ? await fs.readFile(filePath)
+      : await fs.readFile(filePath, 'utf-8');
+    
     return { content, fileType };
   }
 
@@ -68,9 +74,17 @@ export class FileParser {
       fileType = 'jsonld';
     } else if (url.endsWith('.pdf')) {
       fileType = 'pdf';
+    } else if (url.endsWith('.xlsx') || url.endsWith('.xls')) {
+      fileType = 'excel';
     }
 
-    const content = Buffer.from(response.data).toString('utf-8');
+    const binaryTypes = ['pdf', 'excel'];
+    
+    // Return buffer for binary types, UTF-8 string for text types
+    const content = binaryTypes.includes(fileType)
+      ? Buffer.from(response.data)
+      : Buffer.from(response.data).toString('utf-8');
+    
     return { content, fileType };
   }
 

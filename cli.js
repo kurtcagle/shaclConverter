@@ -39,20 +39,35 @@ program
         const result = await FileParser.loadUrl(source);
         content = result.content;
         fileType = result.fileType;
-      } else {
-        // Check for special file types that need parsing
-        const detectedType = FileParser.detectFileType(source);
         
-        if (detectedType === 'excel') {
+        // Parse binary types after loading
+        if (fileType === 'excel') {
+          // For URL-loaded Excel, content is already a buffer
+          const xlsx = (await import('xlsx')).default;
+          const workbook = xlsx.read(content, { type: 'buffer' });
+          const parsed = {};
+          workbook.SheetNames.forEach(sheetName => {
+            const worksheet = workbook.Sheets[sheetName];
+            parsed[sheetName] = xlsx.utils.sheet_to_json(worksheet);
+          });
+          content = JSON.stringify(parsed, null, 2);
+        } else if (fileType === 'pdf') {
+          // For URL-loaded PDF, content is already a buffer
+          const pdfParse = (await import('pdf-parse')).default;
+          const data = await pdfParse(content);
+          content = data.text;
+        }
+      } else {
+        const result = await FileParser.loadFile(source);
+        content = result.content;
+        fileType = result.fileType;
+        
+        // Parse binary types that were loaded as buffers
+        if (fileType === 'excel') {
           content = await FileParser.parseExcel(source);
-          fileType = 'excel';
-        } else if (detectedType === 'pdf') {
+        } else if (fileType === 'pdf') {
           content = await FileParser.parsePdf(source);
-          fileType = 'pdf';
-        } else {
-          const result = await FileParser.loadFile(source);
-          content = result.content;
-          fileType = result.fileType;
+        }
         }
       }
 
@@ -159,19 +174,37 @@ async function runConversion(source, type, options) {
     }
 
     console.error('Loading source...');
-    let content;
+    let content, fileType;
 
     if (source.startsWith('http://') || source.startsWith('https://')) {
       const result = await FileParser.loadUrl(source);
       content = result.content;
+      fileType = result.fileType;
+      
+      // Parse binary types after loading
+      if (fileType === 'excel') {
+        const xlsx = (await import('xlsx')).default;
+        const workbook = xlsx.read(content, { type: 'buffer' });
+        const parsed = {};
+        workbook.SheetNames.forEach(sheetName => {
+          const worksheet = workbook.Sheets[sheetName];
+          parsed[sheetName] = xlsx.utils.sheet_to_json(worksheet);
+        });
+        content = JSON.stringify(parsed, null, 2);
+      } else if (fileType === 'pdf') {
+        const pdfParse = (await import('pdf-parse')).default;
+        const data = await pdfParse(content);
+        content = data.text;
+      }
     } else {
-      const fileType = FileParser.detectFileType(source);
+      const result = await FileParser.loadFile(source);
+      fileType = result.fileType;
+      
       if (fileType === 'excel') {
         content = await FileParser.parseExcel(source);
       } else if (fileType === 'pdf') {
         content = await FileParser.parsePdf(source);
       } else {
-        const result = await FileParser.loadFile(source);
         content = result.content;
       }
     }
