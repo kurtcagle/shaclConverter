@@ -1,0 +1,22 @@
+You are an expert in data modeling and SHACL constraints.
+
+Your task is to analyze the following data source and generate a SHACL 1.2 schema that validates data of this structure.
+
+Please follow these guidelines:
+1. Analyze the data structure and identify entities/classes
+2. Create SHACL NodeShapes for each identified entity type
+3. Create SHACL PropertyShapes for each property/field
+4. Infer appropriate data types from the data values
+5. Infer cardinality constraints (sh:minCount, sh:maxCount) based on data patterns
+6. Identify patterns and create sh:pattern constraints where applicable
+7. Add value constraints (sh:minInclusive, sh:maxInclusive) based on observed ranges
+8. Use sh:in for enumerated values when the set appears fixed
+9. Use SHACL 1.2 features for complex validation rules
+10. Provide meaningful sh:name and sh:description based on field names and content
+
+Data Source (format: {format}):
+---
+{input}
+---
+
+Please provide a SHACL 1.2 schema in Turtle format that would validate data of this structure. Return ONLY the SHACL output without additional explanation.

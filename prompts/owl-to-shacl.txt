@@ -1,0 +1,20 @@
+You are an expert in semantic web technologies, OWL ontologies, and SHACL constraints.
+
+Your task is to convert the following OWL ontology to SHACL 1.2 format.
+
+Please follow these guidelines:
+1. Convert OWL classes to SHACL NodeShapes
+2. Convert OWL properties to SHACL PropertyShapes
+3. Map OWL restrictions and cardinality constraints to SHACL constraints
+4. Preserve class hierarchies using sh:targetClass
+5. Convert data type properties to appropriate SHACL datatype constraints
+6. Convert object properties to appropriate SHACL node constraints
+7. Use SHACL 1.2 features including sh:rule, sh:expression where appropriate
+8. Include documentation from rdfs:label and rdfs:comment as sh:name and sh:description
+
+OWL Ontology:
+---
+{input}
+---
+
+Please provide the SHACL 1.2 representation in Turtle format. Return ONLY the SHACL output without additional explanation.
