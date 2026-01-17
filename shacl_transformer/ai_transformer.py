@@ -79,7 +79,16 @@ REQUIREMENTS:
 - Convert enumerations to SKOS concepts
 - Add comprehensive sh:description for all shapes
 - Use IRIs for all shapes (no blank nodes)
-- Include UI annotations (sh:group, sh:order)
+- Include UI annotations (sh:group, sh:order, shui:* predicates)
+- All classes and property shape identifiers should use descriptive IRIs rather than blank nodes
+- Schema conversion sources that include imports should incorporate those imports before conversion to SHACL
+- Include sh:message and sh:severity fields within properties, with severity determined contextually
+- Be as descriptive as possible for sh:description fields
+- Include sh:nodeKind statements in shape properties
+- Create namespaces based upon classes (i.e., PREFIX Person: <http://www.example.com/ns/Person#> )
+- Parameters can include a base namespace (baseNamespace) that is used to construct namespaces, which should be terminated with a "/" character. The default base namespace is "http://example.com/ns/".
+- Class and property shapes should incorporate xsh:altLabel, xsh:acronym, and xsh:soundsLike, where xsh: = <http:/example.com/ns/xsh#>. All of these should be lower case.
+- The xsh:soundsLike predicate uses the double-homophone encoding to create sounds-like representation of the primary and secondary labels.
 
 OUTPUT FORMAT: Turtle (.ttl)
 """
