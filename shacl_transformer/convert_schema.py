@@ -18,7 +18,8 @@ def convert_schema(
     output_format: str = "turtle",
     use_ai: bool = True,
     api_key: Optional[str] = None,
-    parameters: Optional[dict] = None
+    parameters: Optional[dict] = None,
+    prompt: Optional[str] = None
 ) -> Union[str, None]:
     """
     Convert various schema formats to SHACL 1.2 compliant schemas.
@@ -33,6 +34,7 @@ def convert_schema(
         use_ai: Use AI transformer for enhanced conversion
         api_key: Anthropic API key (for AI mode)
         parameters: Optional conversion parameters
+        prompt: Additional prompt instructions
         
     Returns:
         SHACL schema as string if output_file is None, otherwise None
