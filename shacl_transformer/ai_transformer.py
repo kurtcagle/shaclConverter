@@ -71,10 +71,10 @@ SOURCE SCHEMA:
 {source_schema}
 
 REQUIREMENTS:
-- Full SHACL 1.2 compliance (https://www.w3.org/TR/shacl12-core/)
-- Include SHACL Core constraints
+- Full SHACL 1.2 compliance (read current https://www.w3.org/TR/shacl12-core/ and subordinate documents)
+- Include SHACL 1.2 Core constraints
 - Add node expressions where appropriate
-- Create SHACL Rules for calculated properties
+- Create SHACL 1.2 Rules for calculated properties
 - Use sh:name and sh:codeIdentifier
 - Convert enumerations to SKOS concepts
 - Add comprehensive sh:description for all shapes
